@@ -47,8 +47,25 @@ Data berukuran (3560, 50, 1) (3560, 1). Data ini memberikan gambaran tentang har
 * **Normalisasi Data**: Normalisasi digunakan untuk menghindari masalah stabilitas numerik pada algoritma Machine Learning.
 * **Pembagian Data**: Dataset dibagi menjadi data latih dan data uji dengan proporsi 80% data latih dan 20% data uji menggunakan `train_test_split`.
 
+* **Pembuatan Pasangan Fitur dan Label**
+  
+  ![gambar](https://github.com/user-attachments/assets/9028c0fa-538b-4cf2-b508-e6f890a05f43)
+
+    - Inisialisasi Daftar Kosong: X_l dan y_l digunakan untuk menyimpan fitur dan label masing-masing.
+    - Definisi Variabel: N adalah jumlah total baris dalam dataframe df, dan D adalah ukuran jendela (window size) yang menentukan berapa banyak langkah waktu sebelumnya yang digunakan untuk membuat fitur. Dalam hal ini, D diatur ke 50.
+    - Iterasi dan Pembentukan Pasangan Fitur-Label: Loop iterasi digunakan untuk mengambil jendela data dari i hingga i+D sebagai fitur (X_l) dan baris berikutnya sebagai
+    - label (y_l). Ini memastikan bahwa setiap pasangan fitur dan label dihasilkan dari data berurutan.
+    - Konversi ke Array Numpy: Daftar X_l dan y_l diubah menjadi array numpy untuk operasi numerik yang efisien dan kompatibilitas dengan pustaka Machine Learning.
+    - Cetak Bentuk Array: Mencetak bentuk X dan y untuk memverifikasi bahwa data telah dipersiapkan dengan benar. Bentuk X akan menunjukkan (jumlah sampel, D, jumlah fitur), sedangkan y akan menunjukkan (jumlah sampel,).
+
 ## Modeling
-* **Model yang Digunakan**: Model sequential dengan LSTM, lapisan Dense, dan Dropout. LSTM dipilih untuk kemampuannya dalam menangani data urutan dan memori jangka panjang.
+* **Model yang Digunakan**: Model sequential dengan LSTM, lapisan Dense. LSTM adalah jenis Recurrent Neural Network (RNN) yang dirancang untuk mengatasi masalah pembelajaran jangka panjang pada data urutan. LSTM mampu menyimpan informasi dalam jangka waktu yang lama dan menangani ketergantungan temporal dalam data. LSTM dipilih untuk kemampuannya dalam menangani data urutan dan memori jangka panjang.
+  
+* **Cara Kerja** :
+  1. Input Gate: Mengontrol seberapa banyak informasi baru yang akan disimpan dalam unit memori. Ini menggunakan fungsi aktivasi sigmoid untuk memutuskan seberapa banyak informasi yang diperbarui dan memodifikasi nilai input.
+  2. Forget Gate: Menentukan informasi mana yang harus dilupakan dari unit memori. Gerbang ini juga menggunakan fungsi aktivasi sigmoid untuk memutuskan informasi mana yang harus dihapus dari memori berdasarkan relevansi.
+  3. Output Gate: Mengontrol informasi apa yang akan dikeluarkan dari unit memori. Gerbang ini mengkombinasikan informasi dari unit memori dengan hasil dari fungsi aktivasi sigmoid untuk menghasilkan output akhir.
+    
 * **Arsitektur Model**:
   
   ![gambar](https://github.com/user-attachments/assets/d8178bdb-ed64-4229-a38d-878ac01b8ac5)
@@ -67,7 +84,8 @@ Data berukuran (3560, 50, 1) (3560, 1). Data ini memberikan gambaran tentang har
   - Fungsi loss yang digunakan dalam model ini adalah Mean Squared Error (MSE), yang cocok untuk tugas regresi di mana tujuan utamanya adalah meminimalkan selisih kuadrat rata-rata antara nilai yang diprediksi dan nilai sebenarnya. Pastikan bahwa MSE sesuai dengan skala dan karakteristik data Anda. Dalam kasus di mana prediksi atau fitur data memiliki karakteristik tertentu, mungkin perlu menggunakan metrik atau fungsi loss lain.
 
 ## Model Prediction
+
 ![gambar](https://github.com/user-attachments/assets/d04fe768-0b1c-45b9-a39e-1315d319727c)
 
 * **Prediction Summary**
-Prediksi model telah divisualisasikan, menunjukkan harga Bitcoin yang diperkirakan berdasarkan data historis yang diberikan. Hasil prediksi memberikan wawasan tentang tren harga di masa depan, yang dapat membantu investor dalam membuat keputusan yang terinformasi. Meskipun demikian, satu hal yang pasti adalah bahwa prediksi ini tidak terlalu baik. LSTM mengalami kesulitan dalam memprediksi harga Bitcoin.
+Prediksi model telah divisualisasikan, menunjukkan harga Bitcoin yang diperkirakan berdasarkan data historis yang diberikan. Hasil prediksi memberikan wawasan tentang tren harga di masa depan, yang dapat membantu investor dalam membuat keputusan yang terinformasi.
