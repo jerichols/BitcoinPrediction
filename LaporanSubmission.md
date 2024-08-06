@@ -29,14 +29,19 @@ Data yang digunakan diambil dari sumber berikut: [Bitcoin Historical Data](https
 Dataset ini berisi data harga Bitcoin dari tanggal 2014-09-17 sampai tanggal 2024-08-06. Dataset ini terdiri dari beberapa variable tetapi hanya dua variabel utama saja yang terpakai yaitu:
 * **Date**: Tanggal transaksi.
 * **Close**: Harga penutupan Bitcoin pada tanggal tertentu.
+* **Open**: Harga pembukaan Bitcoin pada tanggal tertentu.
+* **High**: Harga tertinggi Bitcoin pada tanggal tertentu.
+* **Low**: Harga terendah Bitcoin pada tanggal tertentu.
+* **Adj Close**: Harga penutupan yang disesuaikan dengan faktor-faktor seperti pembagian saham.
+* **Volume**: Jumlah Bitcoin yang diperdagangkan pada tanggal tertentu.
 
-Data ini memberikan gambaran tentang harga Bitcoin dari waktu ke waktu, meskipun tidak mencakup semua aspek pasar cryptocurrency.
+Data berukuran (3560, 50, 1) (3560, 1). Data ini memberikan gambaran tentang harga Bitcoin dari waktu ke waktu, meskipun tidak mencakup semua aspek pasar cryptocurrency. Untuk kondisi data terdapat Missing value yang akan dibersihkan di data preparation.
 
 #### Bitcoin Price Chart
 ![gambar](https://github.com/user-attachments/assets/ee399dd3-f3c9-4fe6-b1fa-b3f4f189e31b)
 
 ## Data Preparation
-* **Pengecekan Data**: Dataset ini telah dibersihkan dari nilai yang hilang.
+* **Pengecekan Data**: Dataset ini telah dibersihkan dari nilai yang hilang. Nilai null dihilangkan dengan drop.
 * **Format Tanggal**: Kolom 'Date' diubah formatnya menggunakan `pd.to_datetime` dan diatur sebagai indeks.
 * **Feature Selection**: Hanya kolom 'Date' dan 'Close' yang digunakan. Kolom harga diubah menjadi float dan dinormalisasi menggunakan `MinMaxScaler`.
 * **Normalisasi Data**: Normalisasi digunakan untuk menghindari masalah stabilitas numerik pada algoritma Machine Learning.
@@ -57,12 +62,12 @@ Data ini memberikan gambaran tentang harga Bitcoin dari waktu ke waktu, meskipun
 
 * **Interpretation**
   
-  - The low loss values on both training and validation datasets suggest that the model performs well in minimizing the prediction error. Specifically, the final           training loss of 0.0001 and the final validation loss of 0.0002 indicate a very low error rate, which is generally a positive outcome.
-  - Despite the low loss values, it is crucial to assess whether the model is overfitting. Overfitting occurs when a model performs well on training and validation          datasets but fails to generalize to new, unseen data. It is recommended to evaluate the model's performance on additional datasets or through cross-validation           to ensure robustness and generalizability.
-  - The loss function used in this model is Mean Squared Error (MSE), which is suitable for regression tasks where the goal is to minimize the average squared       difference between predicted and actual values. Confirm that MSE aligns with the scale and nature of your data. In cases where predictions or data features have specific characteristics, it might be necessary to use other metrics or loss functions.
+  - Nilai loss yang rendah pada dataset pelatihan dan validasi menunjukkan bahwa model berfungsi dengan baik dalam meminimalkan kesalahan prediksi. Secara spesifik, nilai loss akhir pada pelatihan sebesar 0.0001 dan pada validasi sebesar 0.0002 menunjukkan tingkat kesalahan yang sangat rendah, yang umumnya merupakan hasil yang positif.
+  - Meskipun nilai loss yang rendah, penting untuk menilai apakah model mengalami overfitting. Overfitting terjadi ketika model tampil baik pada dataset pelatihan dan validasi tetapi gagal untuk digeneralisasikan ke data baru yang belum pernah dilihat. Disarankan untuk mengevaluasi kinerja model pada dataset tambahan atau melalui cross-validation untuk memastikan ketahanan dan kemampuan generalisasi.
+  - Fungsi loss yang digunakan dalam model ini adalah Mean Squared Error (MSE), yang cocok untuk tugas regresi di mana tujuan utamanya adalah meminimalkan selisih kuadrat rata-rata antara nilai yang diprediksi dan nilai sebenarnya. Pastikan bahwa MSE sesuai dengan skala dan karakteristik data Anda. Dalam kasus di mana prediksi atau fitur data memiliki karakteristik tertentu, mungkin perlu menggunakan metrik atau fungsi loss lain.
 
 ## Model Prediction
 ![gambar](https://github.com/user-attachments/assets/d04fe768-0b1c-45b9-a39e-1315d319727c)
 
-***Prediction Summary**
-The model’s predictions have been visualized, showing the forecasted Bitcoin prices based on the historical data provided. The prediction results offer insights into future price trends, which can assist investors in making informed decisions. Although one thing is certain it is not a really good predictions. LSTM have a hard time  predicting the price of Bitcoin.
+* **Prediction Summary**
+Prediksi model telah divisualisasikan, menunjukkan harga Bitcoin yang diperkirakan berdasarkan data historis yang diberikan. Hasil prediksi memberikan wawasan tentang tren harga di masa depan, yang dapat membantu investor dalam membuat keputusan yang terinformasi. Meskipun demikian, satu hal yang pasti adalah bahwa prediksi ini tidak terlalu baik. LSTM mengalami kesulitan dalam memprediksi harga Bitcoin.
