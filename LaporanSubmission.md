@@ -33,7 +33,7 @@ Dataset ini berisi data harga Bitcoin dari tanggal 2014-09-17 sampai tanggal 202
 Data ini memberikan gambaran tentang harga Bitcoin dari waktu ke waktu, meskipun tidak mencakup semua aspek pasar cryptocurrency.
 
 #### Bitcoin Price Chart
-![Bitcoin Price Chart](https://upload.wikimedia.org/wikipedia/commons/3/3d/Bitcoin_price_chart.png)
+![gambar](https://github.com/user-attachments/assets/ee399dd3-f3c9-4fe6-b1fa-b3f4f189e31b)
 
 ## Data Preparation
 * **Pengecekan Data**: Dataset ini telah dibersihkan dari nilai yang hilang.
@@ -45,13 +45,24 @@ Data ini memberikan gambaran tentang harga Bitcoin dari waktu ke waktu, meskipun
 ## Modeling
 * **Model yang Digunakan**: Model sequential dengan LSTM, lapisan Dense, dan Dropout. LSTM dipilih untuk kemampuannya dalam menangani data urutan dan memori jangka panjang.
 * **Arsitektur Model**:
-  ```python
-  model = Sequential([
-      LSTM(60, return_sequences=True),
-      LSTM(60),
-      Dense(30, activation="relu"),
-      Dropout(0.3),
-      Dense(10, activation="relu"),
-      Dropout(0.2),
-      Dense(1),
-  ])
+  
+  ![gambar](https://github.com/user-attachments/assets/d8178bdb-ed64-4229-a38d-878ac01b8ac5)
+* **Model Training**
+  ![gambar](https://github.com/user-attachments/assets/7bb110aa-7aeb-4bac-b152-dfd4e3339f6c)
+  Model ditrain untuk 500 epochs.
+## Evaluasi Model
+  ![gambar](https://github.com/user-attachments/assets/d7cd7802-a453-428b-a0db-aff605fbefec)
+  - Final Training Loss: 0.0001
+  - Final Validation Loss: 0.0002:
+
+* **Interpretation**
+  
+  - The low loss values on both training and validation datasets suggest that the model performs well in minimizing the prediction error. Specifically, the final           training loss of 0.0001 and the final validation loss of 0.0002 indicate a very low error rate, which is generally a positive outcome.
+  - Despite the low loss values, it is crucial to assess whether the model is overfitting. Overfitting occurs when a model performs well on training and validation          datasets but fails to generalize to new, unseen data. It is recommended to evaluate the model's performance on additional datasets or through cross-validation           to ensure robustness and generalizability.
+  - The loss function used in this model is Mean Squared Error (MSE), which is suitable for regression tasks where the goal is to minimize the average squared       difference between predicted and actual values. Confirm that MSE aligns with the scale and nature of your data. In cases where predictions or data features have specific characteristics, it might be necessary to use other metrics or loss functions.
+
+## Model Prediction
+![gambar](https://github.com/user-attachments/assets/d04fe768-0b1c-45b9-a39e-1315d319727c)
+
+***Prediction Summary**
+The model’s predictions have been visualized, showing the forecasted Bitcoin prices based on the historical data provided. The prediction results offer insights into future price trends, which can assist investors in making informed decisions. Although one thing is certain it is not a really good predictions. LSTM have a hard time  predicting the price of Bitcoin.
